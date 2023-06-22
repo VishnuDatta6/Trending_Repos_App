@@ -1,24 +1,30 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './components/Home';
+import PrivateRouter from './components/PrivateRouter';
+import RepoListPage from './components/RepoListPage';
+import RepoDetailsPage from './components/RepoDetailsPage';
+import NotFound from './components/NotFound';
+import Logout from './components/Logout';
+import { useSelector } from 'react-redux';
 
 function App() {
+  const repoLocation = useSelector(state => state.location);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <Logout />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route element={<PrivateRouter />}>
+            <Route exact path="/repos" element={<RepoListPage />} />
+            <Route exact path={`repos/${repoLocation}`} element={< RepoDetailsPage repoLocation={repoLocation} />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 
