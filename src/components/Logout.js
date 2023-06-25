@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router'
 import { setAccessToken } from './A&R/reducers/authSlice';
+import { persistor } from './A&R/store';
 
 const Logout = () => {
     const navigate = useNavigate();
@@ -10,6 +11,7 @@ const Logout = () => {
 
     const handleLogout = ()=>{
         dispatch(setAccessToken(null));
+        persistor.purge();
         navigate('/',{replace: true});
         const url = new URL(window.location);
         url.searchParams.delete('code');
@@ -22,4 +24,4 @@ const Logout = () => {
   );
 };
 
-export default Logout
+export default Logout;

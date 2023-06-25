@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { setLocation } from './A&R/reducers/locationSlice';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 
 const RepoListPage = () => {
@@ -12,17 +11,12 @@ const RepoListPage = () => {
   const [filteredRepos, setFilteredRepos] = useState([])
   const [languageFilter, setLanguageFilter] = useState('');
   const languages = [...new Set(repos.map(obj => obj.language))];
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   useEffect(() => {
     filterRepos();
+    console.log(repos)
+    console.log(accessToken)
     // eslint-disable-next-line
-  }, [repos, languageFilter]);
-
-  const handleClick = (repoName) => {
-    dispatch(setLocation(repoName))
-    navigate(`/repos/${repoName}`);
-  }
+  }, [languageFilter]);
 
   const filterRepos = () => {
     let filtered = [...repos];
@@ -36,9 +30,9 @@ const RepoListPage = () => {
     return <div>You need to login to view this page</div>;
   }
   if (loading) {
-    return <div className="spinner-border text-primary mx-5" role="status">
+    return (<div className="spinner-border text-primary mx-5" role="status">
       <span className="visually-hidden">Loading trending repos</span>
-    </div>;
+    </div>);
   }
   if (error) {
     return <div>Error: {error}</div>;
@@ -78,7 +72,7 @@ const RepoListPage = () => {
           filteredRepos.map(ele => {
             return (
               <div className='container border p-3' key={ele.id}>
-                <Link to={`/repos/${ele.full_name}`} ><h2 onClick={() => handleClick(ele.full_name)}>{ele.full_name}</h2></Link>
+                <h2><Link to={`/repos/${ele.full_name}`}>{ele.full_name}</Link></h2>
               </div>)
           }
           )) : <div>No trending repos found.</div>}

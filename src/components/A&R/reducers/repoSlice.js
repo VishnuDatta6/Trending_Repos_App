@@ -6,7 +6,7 @@ const repoSlice = createSlice({
     name: 'repos',
     initialState: {
         loading:false,
-        repos:[],
+        repos:[1],
         error:null
     },
     reducers: {},

@@ -1,15 +1,21 @@
-import React from 'react'
-import { useNavigate } from 'react-router';
+import React, { useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-const RepoDetailsPage = (props) => {
+const RepoDetailsPage = () => {
   const navigate = useNavigate();
-  const repos = useSelector(state => state.repos.repos);
-  const repo = repos.find(repo => repo.full_name === props.repoLocation);
+  const {rePo, locaTion} = useParams();
+  const accessToken = useSelector(state => state.auth.accessToken);
+  const repo = useSelector(state => state.repos.repos.find(repo => repo.full_name === rePo+'/'+locaTion));
 
   const handleBack = ()=>{
     navigate('/repos');
   }
+  useEffect(()=>{
+    console.log(rePo, locaTion);
+    console.log(accessToken);
+    console.log('repo' , repo);
+  },[])
 
   return (
     <section className='container'>
@@ -44,4 +50,5 @@ const RepoDetailsPage = (props) => {
     </section>
   );
 };
+
 export default RepoDetailsPage;
