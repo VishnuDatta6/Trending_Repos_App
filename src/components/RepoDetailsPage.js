@@ -12,9 +12,6 @@ const RepoDetailsPage = () => {
     navigate('/repos');
   }
   useEffect(()=>{
-    console.log(rePo, locaTion);
-    console.log(accessToken);
-    console.log('repo' , repo);
   },[])
 
   return (
