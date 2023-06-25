@@ -43,5 +43,9 @@ Click on a repository name to view its detailed information.
 Contributing
 Contributions are welcome! If you find any issues or have suggestions for improvements, feel free to open an issue or submit a pull request.
 
-## License
-This project is licensed under the MIT License.
+## Screenshots of the App
+![TrendingRepos_Home_Page](https://github.com/VishnuDatta6/Trending_Repos_App/assets/114680085/90e69a7a-c343-4e20-8a97-d26b16a1ef48)
+
+![TrendingRepos_RepoDetails_Page](https://github.com/VishnuDatta6/Trending_Repos_App/assets/114680085/56e14855-e9a4-4058-8b7f-777a0a8862e4)
+
+![TrendingRepos_RepoList_Page](https://github.com/VishnuDatta6/Trending_Repos_App/assets/114680085/f33ab0e3-8511-4f17-a7d2-038ce4f541d2)
