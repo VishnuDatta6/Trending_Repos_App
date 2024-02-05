@@ -18,7 +18,7 @@ const Logout = () => {
         window.history.replaceState({}, document.title, url);
     };
   return (
-    <div className='container text-end m-3'>
+    <div className='container text-end my-3'>
         { accessToken ? <button className='btn btn-danger' onClick={handleLogout}>Logout</button> : null }
     </div>
   );

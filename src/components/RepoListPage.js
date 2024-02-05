@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 
+
 const RepoListPage = () => {
   const repos = useSelector(state => state.repos.repos);
   const loading = useSelector(state => state.repos.loading);
@@ -10,13 +11,14 @@ const RepoListPage = () => {
   const accessToken = useSelector(state => state.auth.accessToken);
   const [filteredRepos, setFilteredRepos] = useState([])
   const [languageFilter, setLanguageFilter] = useState('');
-  const languages = [...new Set(repos.map(obj => obj.language))];
+  const languages =  repos?.length ? [...new Set(repos.map(obj => obj.language))] : [];
+  
   useEffect(() => {
-    filterRepos();
-    console.log(repos)
-    console.log(accessToken)
+    if(!repos?.length) return;
+    filterRepos();    
     // eslint-disable-next-line
   }, [languageFilter]);
+
 
   const filterRepos = () => {
     let filtered = [...repos];
@@ -30,13 +32,21 @@ const RepoListPage = () => {
     return <div>You need to login to view this page</div>;
   }
   if (loading) {
-    return (<div className="spinner-border text-primary mx-5" role="status">
+    return (
+    <div className='w-100'>
+    <div className="spinner-border text-primary mx-auto" role="status">
       <span className="visually-hidden">Loading trending repos</span>
+    </div>
     </div>);
   }
   if (error) {
     return <div>Error: {error}</div>;
   }
+
+  if(!repos){
+    return <div>No Repositories</div>
+  }
+
   return (
     <section>
       <div className='container text-center bg-light border rounded-2 p-4'>
@@ -71,7 +81,7 @@ const RepoListPage = () => {
         {filteredRepos.length > 0 ? (
           filteredRepos.map(ele => {
             return (
-              <div className='container border p-3' key={ele.id}>
+              <div className='container border p-3 my-2' key={ele.id}>
                 <h2><Link to={`/repos/${ele.full_name}`}>{ele.full_name}</Link></h2>
               </div>)
           }
