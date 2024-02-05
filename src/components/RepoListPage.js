@@ -14,6 +14,7 @@ const RepoListPage = () => {
   const languages =  repos?.length ? [...new Set(repos.map(obj => obj.language))] : [];
   
   useEffect(() => {
+    if(!repos) return;
     filterRepos();
     // eslint-disable-next-line
   }, [languageFilter]);
